@@ -1,0 +1,45 @@
+<nav class="bg-white shadow-sm">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+
+            <!-- LOGO -->
+            <div class="flex flex-1 items-center">
+                <a href="#" class="flex items-center gap-2">
+                    <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                         alt="Logo"
+                         class="h-8 w-auto">
+                    <span class="text-lg font-semibold text-gray-800">Minha Empresa</span>
+                </a>
+            </div>
+
+            <!-- MENU MOBILE (exibido apenas no mobile) -->
+            <div class="flex gap-4 lg:hidden">
+                <a href="{% url 'home' %}" class="text-sm font-medium text-gray-800 hover:text-indigo-600">Home</a>
+                <a href="#" class="text-sm font-medium text-gray-800 hover:text-indigo-600">Teste01</a>
+                <a href="#" class="text-sm font-medium text-gray-800 hover:text-indigo-600">Teste02</a>
+            </div>
+
+            <!-- MENU DESKTOP -->
+            <div class="hidden lg:flex lg:items-center lg:gap-8">
+
+                <a href="{% url 'home' %}" class="text-sm font-medium text-gray-700 hover:text-indigo-600 transition">
+                    Home
+                </a>
+
+                <a href="#" class="text-sm font-medium text-gray-700 hover:text-indigo-600 transition">
+                    Teste01
+                </a>
+
+                <a href="#" class="text-sm font-medium text-gray-700 hover:text-indigo-600 transition">
+                    Teste02
+                </a>
+
+                <!-- LOGIN alinhado à direita -->
+                <a href="#" class="ml-8 text-sm font-semibold text-indigo-600 hover:text-indigo-700">
+                    Entrar &rarr;
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
