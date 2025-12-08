@@ -1,0 +1,8 @@
+<h1>Orçamentos</h1>
+<ul>
+  {% for o in orcamentos %}
+    <li>{{ o.id_orc }} - {{ o.nome }} - Subtotal: {{ o.subtotal }} - Total: {{ o.total }}</li>
+  {% empty %}
+    <li>Nenhum orçamento cadastrado.</li>
+  {% endfor %}
+</ul>

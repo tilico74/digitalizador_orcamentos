@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mb-4  bg-blue-600 text-white p-4 rounded-md flex justify-between items-center">
+    <h1 class="text-xl font-semibold">{% block title %}Listar Orçamentos{% endblock %}</h1>
+    <div class="flex gap-2 mt-2">
+        <button class="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700">
+            Novo orçamento
+        </button>
+        <button
+            class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50">
+            Filtrar
+        </button>
+    </div>
+</div>
+
+<table class="min-w-full bg-white border border-gray-200 mt-4">
+    <thead>
+        <tr>
+            <th class="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-700">Nome</th>
+            <th class="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-700">Endereço</th>
+            <th class="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-700">Condomínio</th>
+            <th class="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-700">Fones</th>
+            <th class="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-700">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for orcamento in orcamentos %}
+        <tr class="hover:bg-gray-50">
+            <td class="px-6 py-4 border-b border-gray-200 text-sm text-gray-900">{{ orcamento.nome }}</td>
+            <td class="px-6 py-4 border-b border-gray-200 text-sm text-gray-900">
+                <p>{{ orcamento.endereco.endereco }}, {{ orcamento.endereco.numero }}</p>
+                <p>{{ orcamento.endereco.bairro}} / {{ orcamento.endereco.municipio }}/ {{ orcamento.endereco.uf }}</p>
+            </td>
+            <td class="px-6 py-4 border-b border-gray-200 text-sm text-gray-900">
+                <p>{{ orcamento.endereco.nome }}</p>
+                <p>{{ orcamento.complemento }}</p>
+
+            </td>
+            <td class="px-6 py-4 border-b border-gray-200 text-sm text-gray-900">
+                <p>{{ orcamento.fone1 }}</p>
+                <p>{{ orcamento.fone2 }}</p>
+            </td>
+            <td class="px-6 py-4 border-b border-gray-200 text-sm text-gray-900 flex gap-2">
+
+                <span class="inline-flex rounded-md shadow-sm">
+                    <button type="button"
+                        class="
+                        relative inline-flex items-center rounded-l-md px-3 py-2 text-sm font-medium bg-cyan-500 text-white hover:bg-cyan-600">
+                        <i class="bi bi-filetype-pdf"></i>
+                    </button>
+                    <button type=" button"
+                        class="
+                        relative -ml-px inline-flex items-center px-3 py-2 text-sm font-medium bg-blue-600 text-white hover:bg-blue-700">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button type="button"
+                        class="
+                        relative -ml-px inline-flex items-center rounded-r-md px-3 py-2 text-sm font-medium bg-red-600 text-white hover:bg-red-700">
+                        <i class="bi bi-trash3"></i>
+                    </button>
+                </span>
+
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="px-6 py-4 text-center text-gray-500">Nenhum orçamento encontrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
