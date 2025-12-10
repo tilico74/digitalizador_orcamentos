@@ -4,13 +4,22 @@
 <div class="mb-4  bg-blue-600 text-white p-4 rounded-md flex justify-between items-center">
     <h1 class="text-xl font-semibold">{% block title %}Listar Orçamentos{% endblock %}</h1>
     <div class="flex gap-2 mt-2">
-        <button class="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700">
-            Novo orçamento
-        </button>
-        <button
-            class="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50">
-            Filtrar
-        </button>
+        <nav class="backdrop-blur-sm rounded-md p-2 inline-flex space-x-2">
+            <a href="{% url 'orc_insere' %}"
+                class="px-4 py-2 text-sm font-medium bg-white/20 hover:bg-white/30 text-white rounded-md transition">
+                <i class="bi bi-plus-circle"></i> Cadastrar Orçamento
+            </a>
+
+            <a href="#"
+                class="px-4 py-2 text-sm font-medium bg-white/20 hover:bg-white/30 text-white rounded-md transition">
+                <i class="bi bi-cloud-arrow-down"></i> Exportar
+            </a>
+
+            <a href="#"
+                class="px-4 py-2 text-sm font-medium bg-white/20 hover:bg-white/30 text-white rounded-md transition">
+                <i class="bi bi-search"></i> Pesquisar
+            </a>
+        </nav>
     </div>
 </div>
 
@@ -44,21 +53,20 @@
             <td class="px-6 py-4 border-b border-gray-200 text-sm text-gray-900 flex gap-2">
 
                 <span class="inline-flex rounded-md shadow-sm">
-                    <button type="button"
+                    <a href="{% url 'orc_pdf' orcamento.id_orc %}" _blank
                         class="
                         relative inline-flex items-center rounded-l-md px-3 py-2 text-sm font-medium bg-cyan-500 text-white hover:bg-cyan-600">
                         <i class="bi bi-filetype-pdf"></i>
-                    </button>
-                    <button type=" button"
+                    </a>
+                    <a href="{% url 'orc_editar' orcamento.id_orc %}"
                         class="
                         relative -ml-px inline-flex items-center px-3 py-2 text-sm font-medium bg-blue-600 text-white hover:bg-blue-700">
                         <i class="bi bi-pencil"></i>
-                    </button>
-                    <button type="button"
-                        class="
-                        relative -ml-px inline-flex items-center rounded-r-md px-3 py-2 text-sm font-medium bg-red-600 text-white hover:bg-red-700">
+                    </a>
+                    <a href="{% url 'orc_excluir' orcamento.id_orc %}"
+                        class="relative -ml-px inline-flex items-center rounded-r-md px-3 py-2 text-sm font-medium bg-red-600 text-white hover:bg-red-700">
                         <i class="bi bi-trash3"></i>
-                    </button>
+                    </a>
                 </span>
 
             </td>

@@ -113,13 +113,15 @@ class Item(models.Model):
         managed = False
         db_table = 'iten'
 
-    @property
-    def m2(self):
-        return self.comprimento * self.largura
+       
 
     @property
+    def m2(self):
+        return round(self.comprimento * self.largura, 3)    
+           
+    @property
     def subtotal(self):
-        return self.m2 * self.preco
+        return round(self.m2 * self.preco, 2)
 
     def __str__(self):
         return f'Item {self.descricao or ""} ({self.m2} m²)'

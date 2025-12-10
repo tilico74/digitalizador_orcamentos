@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -10,6 +12,8 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Meu Projeto{% endblock %}</title>
+    <link rel="icon" href="{% static 'img/cropped-icon-192x192.png' %}" sizes="192x192">
+    
 </head>
 
 <body class="bg-gray-100 text-gray-900">
