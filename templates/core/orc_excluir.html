@@ -16,8 +16,6 @@
 
 <div class="">
 
-
-
     <div class="flex items-center gap-2 py-1">
         <label class="w-16 sm:w-22 md:w-24 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap">
             Nome
@@ -33,11 +31,13 @@
         </div>
     </div>
 
+    {% if orcamento.endereco.tipo != "res" %}
     <div class="flex items-center gap-2 py-1">
         <label
             class="w-16 sm:w-22 md:w-24 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap overflow-hidden truncate">
             Condomínio
         </label>
+
 
         <div class="flex-1 bg-gray-50 border border-gray-300 rounded
                     px-1 sm:px-2 md:px-3
@@ -48,6 +48,7 @@
             {{ orcamento.endereco.nome }}
         </div>
     </div>
+    {% endif %}
 
     <div class="flex items-center gap-2 py-1">
         <label class="w-16 sm:w-22 md:w-24 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap">
@@ -204,113 +205,178 @@
 
 </div>
 
-<div class="space-y-2 mt-3 bg-red-100 p-2 rounded-md border border-red-300  text-xs sm:text-sm md:text-base">
 
+<!--lista de itens para modile-->
+<div class="space-y-2 mt-3 bg-red-100 p-2 rounded-md border border-red-300 text-xs sm:text-sm md:text-base">
 
-    <div class="flex font-semibold text-red-600">
-        <div class="w-[9%] text-center font-semibold truncate">Comprimento</div>
-        <div class="w-[9%] text-center font-semibold truncate">Largura</div>
-        <div class="w-[9%] text-center font-semibold">M²</div>
-        <div class="w-[33%] text-center font-semibold truncate">Descrição</div>
-        <div class="w-[10%] text-center font-semibold truncate">Gancho</div>
-        <div class="w-[10%] text-center font-semibold">Cor</div>
-        <div class="w-[10%] text-center font-semibold">Preço</div>
-        <div class="w-[10%] text-center font-semibold">Valor</div>
+    <!-- Cabeçalho: aparece só no DESKTOP -->
+    <div class="hidden md:flex font-semibold text-red-600">
+        <div class="w-[9%] text-center truncate">Comprimento</div>
+        <div class="w-[9%] text-center truncate">Largura</div>
+        <div class="w-[9%] text-center">M²</div>
+        <div class="w-[33%] text-center truncate">Descrição</div>
+        <div class="w-[10%] text-center truncate">Gancho</div>
+        <div class="w-[10%] text-center">Cor</div>
+        <div class="w-[10%] text-center">Preço</div>
+        <div class="w-[10%] text-center">Valor</div>
     </div>
 
     {% for item in items %}
-    <div class="flex gap-1">
+    <!-- DESKTOP (tabela) -->
+    <div class="hidden md:flex gap-1">
+        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[9%] text-center">{{ item.comprimento }}</div>
+        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[9%] text-center">{{ item.largura }}</div>
+        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[9%] text-center">{{ item.m2 }}</div>
+        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[33%] text-center">{{ item.descricao }}</div>
+        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-center">{{ item.gancho }}</div>
+        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-center">{{ item.cor }}</div>
+        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-right">R$ {{ item.preco }}</div>
+        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-right">R$ {{ item.subtotal }}</div>
+    </div>
 
+    <!-- MOBILE (card) -->
+    <div class="md:hidden bg-white border border-red-300 rounded p-2 space-y-1 shadow-sm text-xs">
 
-        <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] items-center text-center w-[9%]">
-            {{ item.comprimento }}
+        <div class="flex gap-1">            
+            <div class="font-semibold text-red-600 w-[10%] flex items-center justify-left ">Comp.:</div>
+            <div class="border border-gray-300 rounded w-[23%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.comprimento }}</div>
+            <div class="font-semibold text-red-600 w-[8%] flex items-center justify-center">Larg.: </div>
+            <div class="border border-gray-300 rounded w-[23%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.largura }}</div>
+            <div class="font-semibold text-red-600 w-[6%] flex items-center justify-cneter">M²: </div>
+            <div class="border border-gray-300 rounded w-[30%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.m2 }}</div>
         </div>
 
-        <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] items-center text-center w-[9%]">
-            {{ item.largura }}</div>
-
-
-        <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] items-center text-center w-[9%]">
-            {{ item.m2 }}</div>
-
-
-        <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] items-center text-center w-[33%]">
-            {{ item.descricao }}
+        <div class="flex"> 
+            <div class="font-semibold text-red-600 w-[14%] flex items-center justify-left">Descrição:</div>           
+            <div class="border border-gray-300 rounded w-[86%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.descricao }}</div>
         </div>
-
-        <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] items-center text-center w-[10%]">
-            {{ item.gancho }}</div>
-
-        <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] items-center text-center  w-[10%]">
-            {{ item.cor }}</div>
-
-        <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] items-center text-right w-[10%]">
-            R$
-            {{ item.preco }}</div>
-
-        <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] items-center text-right w-[10%]">
-            R$ {{ item.subtotal }}</div>
-
+        
+        <div class="flex">            
+            <div class="font-semibold text-red-600 w-[12%] flex items-center justify-left">Gancho: </div>
+            <div class="border border-gray-300 rounded w-[40%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.gancho }}</div>
+            <div class="font-semibold text-red-600 w-[8%] flex items-center justify-center">Cor: </div>
+            <div class="border border-gray-300 rounded w-[40%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.cor }}</div>
+        </div>
+        <div class="flex">            
+            <div class="font-semibold text-red-600 w-[9%] flex items-center justify-left">Preço:</div>
+            <div class="border border-gray-300 rounded w-[41%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.preco }}</div>
+            <div class="font-semibold text-red-600 w-[9%] flex items-center justify-center">Valor:</div>
+            <div class="border border-gray-300 rounded w-[41%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.subtotal }}</div>
+        </div>        
     </div>
 
     {% empty %}
     <div class="text-sm text-gray-500 py-4 text-center">Nenhum item encontrado.</div>
     {% endfor %}
 
-    <!-- Totals -->
-    <div class="space-y-2">
+    <!-- TOTALIZAÇÃO -->
+    <div class="space-y-3 mt-4">
 
-        <div class="flex gap-1 items-center">
+        <!-- DESKTOP -->
+        <div class="hidden md:flex gap-1 items-center">
             <div class="w-[9%]"></div>
-            <div class="text-center font-semibold text-red-600 w-[9%]">Total M²</div>
-
-            <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] text-center w-[9%]">
+            <div class="w-[9%] text-center font-semibold text-red-600">Total M²</div>
+            <div class="bg-white border border-red-200 rounded px-1 py-1 w-[9%] text-center">
                 {{ orcamento.total_m2 }}
             </div>
-
             <div class="w-[53%]"></div>
-
-            <div class="text-center font-semibold text-red-600 w-[10%] ">Sub-Total</div>
-
-            <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] text-right w-[10%]">
+            <div class="w-[10%] text-center font-semibold text-red-600">Sub-Total</div>
+            <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-right">
                 R$ {{ orcamento.subtotal }}
             </div>
-
         </div>
 
-        <div class="flex gap-1">
+        <div class="hidden md:flex gap-1">
             <div class="w-[80%]"></div>
-            <div class="text-center font-semibold text-red-600 w-[10%]">Desconto</div>
-
-            <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] text-right w-[10%]">
+            <div class="w-[10%] text-center font-semibold text-red-600">Desconto</div>
+            <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-right">
                 R$ {{ orcamento.desconto }}
             </div>
-
         </div>
 
-        <div class="flex gap-1">
+        <div class="hidden md:flex gap-1">
             <div class="w-[80%]"></div>
-            <div class="text-center font-semibold text-red-600 w-[10%]">Total</div>
-            <div class="bg-white border border-red-200 rounded px-1 py-1 min-h-[32px] text-right w-[10%]">
-                R$ {{ orcamento.total}}
+            <div class="w-[10%] text-center font-semibold text-red-600">Total</div>
+            <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-right">
+                R$ {{ orcamento.total }}
             </div>
         </div>
+
+        <!-- MOBILE -->
+        <div class="md:hidden bg-white border border-red-300 rounded p-2 space-y-2 shadow-sm">
+            <div class="flex justify-between">
+                <span class="font-semibold text-red-600">Total M²:</span>
+                <span>{{ orcamento.total_m2 }}</span>
+            </div>
+
+            <div class="flex justify-between">
+                <span class="font-semibold text-red-600">Sub-Total:</span>
+                <span>R$ {{ orcamento.subtotal }}</span>
+            </div>
+
+            <div class="flex justify-between">
+                <span class="font-semibold text-red-600">Desconto:</span>
+                <span>R$ {{ orcamento.desconto }}</span>
+            </div>
+
+            <div class="flex justify-between font-bold text-red-700 text-lg">
+                <span>Total:</span>
+                <span>R$ {{ orcamento.total }}</span>
+            </div>
+        </div>
+
     </div>
-
-
 
 </div>
 
+<!--Fim lista de itens para modile-->
 
-<div class="py-2">
+
+<div class="py-2" x-data="{ abrirModal: false }">
+
     <a href="{% url 'orc_listar' %}"
         class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
         Manter Item
     </a>
-    <button type="submit" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+
+    <!-- Botão que abre o modal -->
+    <button type="button" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+        @click="abrirModal = true">
         Excluir Item
     </button>
+
+    <!-- Modal -->
+    <div x-show="abrirModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        x-transition>
+
+        <div class="bg-white p-6 rounded shadow-xl w-80" @click.outside="abrirModal = false">
+
+            <h2 class="text-lg font-semibold mb-4 text-gray-800">
+                Confirmar Exclusão
+            </h2>
+
+            <p class="text-sm text-gray-600 mb-6">
+                Tem certeza que deseja excluir este item? Esta ação não pode ser desfeita.
+            </p>
+
+            <div class="flex justify-end gap-3">
+                <button type="button" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                    @click="abrirModal = false">
+                    Cancelar
+                </button>
+
+                <form method="post" action="{% url 'orc_excluir' orcamento.id_orc %}">
+                    {% csrf_token %}
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                        Excluir
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div>
+
 
 
 </div>
