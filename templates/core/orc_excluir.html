@@ -14,344 +14,256 @@
     </div>
 </div>
 
-<div class="">
+<div class="grid gap-2">
 
-    <div class="flex items-center gap-2 py-1">
-        <label class="w-16 sm:w-22 md:w-24 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap">
+    <!-- Nome -->
+    <div class="relative py-2">
+        <label
+            class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
             Nome
         </label>
+        <input type="text" value="{{ orcamento.nome }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
 
-        <div class="flex-1 bg-gray-50 border border-gray-300 rounded
-                    px-1 sm:px-2 md:px-3
-                    py-1 sm:py-1.5 md:py-1
-                    text-xs sm:text-sm md:text-base
-                    min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                    flex items-center">
-            {{ orcamento.nome }}
-        </div>
     </div>
 
     {% if orcamento.endereco.tipo != "res" %}
-    <div class="flex items-center gap-2 py-1">
+    <!-- Condomínio -->
+    <div class="relative py-2">
         <label
-            class="w-16 sm:w-22 md:w-24 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap overflow-hidden truncate">
+            class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
             Condomínio
         </label>
-
-
-        <div class="flex-1 bg-gray-50 border border-gray-300 rounded
-                    px-1 sm:px-2 md:px-3
-                    py-1 sm:py-1.5 md:py-1
-                    text-xs sm:text-sm md:text-base
-                    min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                    flex items-center">
-            {{ orcamento.endereco.nome }}
-        </div>
+        <input type="text" value="{{ orcamento.endereco.nome }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
     </div>
     {% endif %}
 
-    <div class="flex items-center gap-2 py-1">
-        <label class="w-16 sm:w-22 md:w-24 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap">
-            Endereço
-        </label>
-        <div class="flex-1 bg-gray-50 border border-gray-300 rounded
-                    px-1 sm:px-2 md:px-3
-                    py-1 sm:py-1.5 md:py-1
-                    text-xs sm:text-sm md:text-base
-                    min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                    flex items-center">
-            {{ orcamento.endereco.endereco }}
-        </div>
-
-        <label class="w-4 sm:w-5 md:w-6 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap">
-            N°
-        </label>
-        <div class="bg-gray-50 border border-gray-300 rounded
-                    px-1 sm:px-2 md:px-3
-                    py-1 sm:py-1.5 md:py-1
-                    text-xs sm:text-sm md:text-base
-                    min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                    w-12 sm:w-16 md:w-20
-                    flex items-center">
-            {{ orcamento.endereco.numero }}
-        </div>
-
-        <label class="w-4 sm:w-5 md:w-6 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap">
-            UF
-        </label>
-        <div class="bg-gray-50 border border-gray-300 rounded
-                    px-1 sm:px-2 md:px-3
-                    py-1 sm:py-1.5 md:py-1
-                    text-xs sm:text-sm md:text-base
-                    min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                    w-6 sm:w-8 md:w-10
-                    flex items-center">
-            {{ orcamento.endereco.uf }}
-        </div>
-    </div>
-
-    <div class="flex items-center gap-2 py-1">
-        <label class="w-16 sm:w-22 md:w-24 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap">
-            Município
-        </label>
-        <div class="flex-1 bg-gray-50 border border-gray-300 rounded
-                    px-1 sm:px-2 md:px-3
-                    py-1 sm:py-1.5 md:py-1
-                    text-xs sm:text-sm md:text-base
-                    min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                    flex items-center
-                    overflow-hidden truncate">
-            {{ orcamento.endereco.municipio }}
-        </div>
-
-        <label class="w-7 sm:w-9 md:w-10 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap">
-            Bairro
-        </label>
-        <div class="flex-1 bg-gray-50 border border-gray-300 rounded
-                    px-1 sm:px-2 md:px-3
-                    py-1 sm:py-1.5 md:py-1
-                    text-xs sm:text-sm md:text-base
-                    min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                    flex items-center
-                    overflow-hidden truncate">
-            {{ orcamento.endereco.bairro }}
-        </div>
-    </div>
-
-    <div class="flex items-center gap-2 py-1">
-        <label
-            class="w-16 sm:w-22 md:w-24 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap overflow-hidden truncate">
-            Complemento
-        </label>
-        <div class="flex-1 bg-gray-50 border border-gray-300 rounded
-                    px-1 sm:px-2 md:px-3
-                    py-1 sm:py-1.5 md:py-1
-                    text-xs sm:text-sm md:text-base
-                    min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                    flex items-center
-                    overflow-hidden truncate">
-            {{ orcamento.complemento }}
-        </div>
-        <label class="w-4 sm:w-6 md:w-7 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap">
-            CEP
-        </label>
-        <div class="bg-gray-50 border border-gray-300 rounded
-                    px-1 sm:px-2 md:px-3
-                    py-1 sm:py-1.5 md:py-1
-                    text-xs sm:text-sm md:text-base
-                    min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                    w-19 sm:w-21 md:w-23
-                    flex items-center">
-            {{ orcamento.endereco.cep }}
-        </div>
-    </div>
-
-
-
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 py-1">
-
-        <!-- Fone 1 -->
-        <div class="flex items-center gap-2">
+    <!-- Endereço + Número -->
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-10 md:col-span-11 py-2">
             <label
-                class="w-16 sm:w-22 md:w-24 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap overflow-hidden truncate">
-                Fone
-            </label>
-            <div class="flex-1 bg-gray-50 border border-gray-300 rounded
-                    px-1 sm:px-2 md:px-3
-                    py-1 sm:py-1.5 md:py-1
-                    text-xs sm:text-sm md:text-base
-                    min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                    w-19 sm:w-21 md:w-23
-                    flex items-center overflow-hidden truncate">
-                {{ orcamento.fone1 }}
-            </div>
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Endereço</label>
+            <input type="text" value="{{ orcamento.endereco.endereco }}" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
         </div>
-
-        <!-- Fone 2 -->
-        <div class="flex items-center gap-2">
-            <label class="w-16 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap text-center">
-                Fone
-            </label>
-            <div class="flex-1 bg-gray-50 border border-gray-300 rounded
-                        px-1 sm:px-2 md:px-3
-                        py-1 sm:py-1.5 md:py-1
-                        text-xs sm:text-sm md:text-base
-                        min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                        w-19 sm:w-21 md:w-23
-                        flex items-center overflow-hidden truncate">
-                {{ orcamento.fone2 }}
-            </div>
-        </div>
-
-        <!-- Email -->
-        <div class="flex items-center gap-2 col-span-2 md:col-span-1">
+        <div class="relative col-span-2 md:col-span-1 py-2">
             <label
-                class="w-16 sm:w-22 md:w-24 text-xs sm:text-sm md:text-base font-medium text-gray-700 whitespace-nowrap text-left md:text-center">
-                Email
-            </label>
-            <div class="flex-1 bg-gray-50 border border-gray-300 rounded
-                        px-1 sm:px-2 md:px-3
-                        py-1 sm:py-1.5 md:py-1
-                        text-xs sm:text-sm md:text-base
-                        min-h-[32px] sm:min-h-[34px] md:min-h-[36px]
-                        w-19 sm:w-21 md:w-23
-                        items-center overflow-hidden truncate">
-                {{ orcamento.email }}
-            </div>
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Nº</label>
+            <input type="text" value="{{ orcamento.endereco.numero}}" maxlength="6" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+    </div>
+
+    <!-- Município + Bairro + UF -->
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-5 md:col-span-5 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Município</label>
+            <input type="text" value="{{ orcamento.endereco.municipio }}" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+        <div class="relative col-span-5 md:col-span-6 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Bairro</label>
+            <input type="text" value="{{ orcamento.endereco.bairro}}" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+        <div class="relative col-span-2 md:col-span-1 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">UF</label>
+            <input type="text" value="{{ orcamento.endereco.uf}}" maxlength="2" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+    </div>
+
+    <!-- Complemento + CEP -->
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-9 md:col-span-11 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Complemento</label>
+            <input type="text" value="{{ orcamento.complemento }}" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+        <div class="relative col-span-3 md:col-span-1 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">CEP</label>
+            <input type="text" value="{{ orcamento.endereco.cep}}" maxlength="9" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+    </div>
+
+    <!-- Fones + Email -->
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-6 md:col-span-3 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Fone</label>
+            <input type="text" value="{{ orcamento.fone1}}" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+        <div class="relative col-span-6 md:col-span-3 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Fone</label>
+            <input type="text" value="{{ orcamento.fone2}}" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+        <div class="relative col-span-12 md:col-span-6 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Email</label>
+            <input type="email" value="{{ orcamento.email}}" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
         </div>
     </div>
 
 </div>
 
-</div>
-
-
-<!--lista de itens para modile-->
-<div class="space-y-2 mt-3 bg-red-100 p-2 rounded-md border border-red-300 text-xs sm:text-sm md:text-base">
-
-    <!-- Cabeçalho: aparece só no DESKTOP -->
-    <div class="hidden md:flex font-semibold text-red-600">
-        <div class="w-[9%] text-center truncate">Comprimento</div>
-        <div class="w-[9%] text-center truncate">Largura</div>
-        <div class="w-[9%] text-center">M²</div>
-        <div class="w-[33%] text-center truncate">Descrição</div>
-        <div class="w-[10%] text-center truncate">Gancho</div>
-        <div class="w-[10%] text-center">Cor</div>
-        <div class="w-[10%] text-center">Preço</div>
-        <div class="w-[10%] text-center">Valor</div>
+<div class="grid gap-1 mt-3 bg-red-100 p-2 rounded-md border border-red-300">
+    <!-- Cabeçalho -->
+    <div class="grid grid-cols-12 gap-2 text-center font-semibold text-red-600 hidden sm:grid">
+        <div class="col-span-1 truncate">Comprimento</div>
+        <div class="col-span-1">Largura</div>
+        <div class="col-span-1">M²</div>
+        <div class="col-span-3">Descrição</div>
+        <div class="col-span-2">Gancho</div>
+        <div class="col-span-2">Cor</div>
+        <div class="col-span-1">Preço</div>
+        <div class="col-span-1">Valor</div>
     </div>
 
+    <!-- Linhas -->
     {% for item in items %}
-    <!-- DESKTOP (tabela) -->
-    <div class="hidden md:flex gap-1">
-        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[9%] text-center">{{ item.comprimento }}</div>
-        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[9%] text-center">{{ item.largura }}</div>
-        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[9%] text-center">{{ item.m2 }}</div>
-        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[33%] text-center">{{ item.descricao }}</div>
-        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-center">{{ item.gancho }}</div>
-        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-center">{{ item.cor }}</div>
-        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-right">R$ {{ item.preco }}</div>
-        <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-right">R$ {{ item.subtotal }}</div>
+    <div
+        class="grid grid-cols-12 gap-2 rounded-md ring-2 ring-red-300 bg-red-50 p-2 sm:ring-0 md:p-0 mb-2 md:mb-0 md:bg-transparent">
+
+        <div class="col-span-4 sm:col-span-1 relative py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-red-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Comprimento</label>
+            <input type="text" value="{{ item.comprimento }}" disabled
+                class="w-full rounded bg-white ring-1 ring-red-300 px-2 py-1 text-gray-700 focus:ring-2 focus:ring-blue-500/40 text-center" />
+        </div>
+        <div class="col-span-4 sm:col-span-1 relative py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-red-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Largura</label>
+            <input type="text" value="{{ item.largura }}" disabled
+                class="w-full rounded bg-white ring-1 ring-red-300 px-2 py-1 text-gray-700 focus:ring-2 focus:ring-blue-500/40 text-center" />
+        </div>
+        <div class="col-span-4 sm:col-span-1 relative py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-red-700 bg-white px-1 leading-none pointer-events-none sm:hidden">M²</label>
+            <input type="text" value="{{ item.m2 }}" disabled
+                class="w-full rounded bg-white ring-1 ring-red-300 px-2 py-1 text-gray-700 focus:ring-2 focus:ring-blue-500/40 text-center" />
+        </div>
+        <div class="col-span-12 sm:col-span-3 relative py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-red-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Descrição</label>
+            <input type="text" value="{{ item.descricao }}" disabled
+                class="w-full rounded bg-white ring-1 ring-red-300 px-2 py-1 text-gray-700 focus:ring-2 focus:ring-blue-500/40" />
+        </div>
+        <div class="col-span-6 sm:col-span-2 relative py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-red-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Gancho</label>
+            <input type="text" value="{{ item.gancho }}" disabled
+                class="w-full rounded bg-white ring-1 ring-red-300 px-2 py-1 text-gray-700 focus:ring-2 focus:ring-blue-500/40 text-center" />
+        </div>
+        <div class="col-span-6 sm:col-span-2 relative py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-red-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Cor</label>
+            <input type="text" value="{{ item.cor }}" disabled
+                class="w-full rounded bg-white ring-1 ring-red-300 px-2 py-1 text-gray-700 focus:ring-2 focus:ring-blue-500/40 text-center" />
+        </div>
+        <div class=" col-span-6 sm:col-span-1 relative py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-red-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Preco</label>
+            <input type="text" value="R$ {{ item.preco }}" disabled
+                class="w-full rounded bg-white ring-1 ring-red-300 px-2 py-1 text-gray-700 text-right focus:ring-2 focus:ring-blue-500/40" />
+        </div>
+        <div class="col-span-6 sm:col-span-1 relative py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-red-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Valor</label>
+            <input type="text" value="R$ {{ item.subtotal }}" disabled
+                class="w-full rounded bg-white ring-1 ring-red-300 px-2 py-1 text-gray-700 text-right focus:ring-2 focus:ring-blue-500/40" />
+        </div>
     </div>
 
-    <!-- MOBILE (card) -->
-    <div class="md:hidden bg-white border border-red-300 rounded p-2 space-y-1 shadow-sm text-xs">
-
-        <div class="flex gap-1">            
-            <div class="font-semibold text-red-600 w-[10%] flex items-center justify-left ">Comp.:</div>
-            <div class="border border-gray-300 rounded w-[23%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.comprimento }}</div>
-            <div class="font-semibold text-red-600 w-[8%] flex items-center justify-center">Larg.: </div>
-            <div class="border border-gray-300 rounded w-[23%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.largura }}</div>
-            <div class="font-semibold text-red-600 w-[6%] flex items-center justify-cneter">M²: </div>
-            <div class="border border-gray-300 rounded w-[30%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.m2 }}</div>
-        </div>
-
-        <div class="flex"> 
-            <div class="font-semibold text-red-600 w-[14%] flex items-center justify-left">Descrição:</div>           
-            <div class="border border-gray-300 rounded w-[86%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.descricao }}</div>
-        </div>
-        
-        <div class="flex">            
-            <div class="font-semibold text-red-600 w-[12%] flex items-center justify-left">Gancho: </div>
-            <div class="border border-gray-300 rounded w-[40%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.gancho }}</div>
-            <div class="font-semibold text-red-600 w-[8%] flex items-center justify-center">Cor: </div>
-            <div class="border border-gray-300 rounded w-[40%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.cor }}</div>
-        </div>
-        <div class="flex">            
-            <div class="font-semibold text-red-600 w-[9%] flex items-center justify-left">Preço:</div>
-            <div class="border border-gray-300 rounded w-[41%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.preco }}</div>
-            <div class="font-semibold text-red-600 w-[9%] flex items-center justify-center">Valor:</div>
-            <div class="border border-gray-300 rounded w-[41%] h-[32px] flex items-center justify-left px-1 py-1">{{ item.subtotal }}</div>
-        </div>        
-    </div>
 
     {% empty %}
     <div class="text-sm text-gray-500 py-4 text-center">Nenhum item encontrado.</div>
     {% endfor %}
 
-    <!-- TOTALIZAÇÃO -->
-    <div class="space-y-3 mt-4">
 
-        <!-- DESKTOP -->
-        <div class="hidden md:flex gap-1 items-center">
-            <div class="w-[9%]"></div>
-            <div class="w-[9%] text-center font-semibold text-red-600">Total M²</div>
-            <div class="bg-white border border-red-200 rounded px-1 py-1 w-[9%] text-center">
-                {{ orcamento.total_m2 }}
+    <div class="rounded-md ring-2 ring-red-300 p-2 sm:ring-0 bg-red-50 md:bg-transparent md:p-0">
+
+        <div class="grid grid-cols-12 gap-2 ">
+
+            <div class="sm:col-span-1 py-2 hidden sm:block"></div>
+            <div class="sm:col-span-1 py-2 text-center font-semibold text-red-600 hidden sm:block">Total M²</div>
+            <div class="col-span-6 sm:col-span-1 relative py-2">
+                <label
+                    class="absolute left-3 top-[-1px] text-[12px] text-red-700 font-semibold bg-white px-1 leading-none pointer-events-none sm:hidden">Total
+                    M²</label>
+                <input type="text" value="{{ orcamento.total_m2 }}" disabled
+                    class="w-full rounded bg-white ring-1 ring-red-300 px-2 py-1 text-gray-700 text-center focus:ring-2 focus:ring-blue-500/40" />
             </div>
-            <div class="w-[53%]"></div>
-            <div class="w-[10%] text-center font-semibold text-red-600">Sub-Total</div>
-            <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-right">
-                R$ {{ orcamento.subtotal }}
+            <div class="col-span-6 sm:col-span-7 py-2 hidden sm:block"></div>
+            <div class="col-span-6 sm:col-span-1 py-2 text-center font-semibold text-red-600 hidden sm:block">Sub-Total
             </div>
+            <div class="col-span-6 sm:col-span-1 relative py-2">
+                <label
+                    class="absolute left-3 top-[-1px] text-[12px] text-red-700 font-semibold bg-white px-1 leading-none pointer-events-none sm:hidden">Sub-Total</label>
+                <input type="text" value="R$ {{ orcamento.subtotal }}" disabled
+                    class="w-full rounded bg-white ring-1 ring-red-300 px-2 py-1 text-red-700 text-right focus:ring-2 focus:ring-blue-500/40" />
+            </div>
+
+
         </div>
-
-        <div class="hidden md:flex gap-1">
-            <div class="w-[80%]"></div>
-            <div class="w-[10%] text-center font-semibold text-red-600">Desconto</div>
-            <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-right">
-                R$ {{ orcamento.desconto }}
+        <div class="grid grid-cols-12 gap-2">
+            <div class="col-span-6 sm:col-span-10 py-2"></div>
+            <div class="col-span-6 sm:col-span-1 py-2 text-center font-semibold text-red-600 hidden sm:block">Desconto
             </div>
+            <div class="col-span-6 sm:col-span-1 relative py-2">
+                <label
+                    class="absolute left-3 top-[-1px] text-[12px] text-red-700 font-semibold bg-white px-1 leading-none pointer-events-none sm:hidden">Desconto</label>
+                <input type="text" value="{{ orcamento.desconto }}" disabled
+                    class="w-full rounded bg-white ring-1 ring-red-300 px-2 py-1 text-gray-700 text-right focus:ring-2 focus:ring-blue-500/40" />
+            </div>
+
         </div>
-
-        <div class="hidden md:flex gap-1">
-            <div class="w-[80%]"></div>
-            <div class="w-[10%] text-center font-semibold text-red-600">Total</div>
-            <div class="bg-white border border-red-200 rounded px-1 py-1 w-[10%] text-right">
-                R$ {{ orcamento.total }}
+        <div class="grid grid-cols-12 gap-2">
+            <div class="col-span-6 sm:col-span-10 py-2"></div>
+            <div class="col-span-6 sm:col-span-1 py-2 text-center font-semibold text-red-600 hidden sm:block">Total
             </div>
+            <div class="col-span-6 sm:col-span-1 relative py-2">
+                <label
+                    class="absolute left-3 top-[-1px] text-[12px] text-red-700 font-semibold bg-white px-1 leading-none pointer-events-none sm:hidden">Total</label>
+                <input type="text" value="R$ {{ orcamento.total }}" disabled
+                    class="w-full rounded bg-white ring-1 ring-red-300 font-bold px-2 py-1 text-red-700 text-right focus:ring-2 focus:ring-blue-500/40" />
+            </div>
+
         </div>
-
-        <!-- MOBILE -->
-        <div class="md:hidden bg-white border border-red-300 rounded p-2 space-y-2 shadow-sm">
-            <div class="flex justify-between">
-                <span class="font-semibold text-red-600">Total M²:</span>
-                <span>{{ orcamento.total_m2 }}</span>
-            </div>
-
-            <div class="flex justify-between">
-                <span class="font-semibold text-red-600">Sub-Total:</span>
-                <span>R$ {{ orcamento.subtotal }}</span>
-            </div>
-
-            <div class="flex justify-between">
-                <span class="font-semibold text-red-600">Desconto:</span>
-                <span>R$ {{ orcamento.desconto }}</span>
-            </div>
-
-            <div class="flex justify-between font-bold text-red-700 text-lg">
-                <span>Total:</span>
-                <span>R$ {{ orcamento.total }}</span>
-            </div>
-        </div>
-
     </div>
-
 </div>
-
-<!--Fim lista de itens para modile-->
 
 
 <div class="py-2" x-data="{ abrirModal: false }">
 
     <a href="{% url 'orc_listar' %}"
-        class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-        Manter Item
+        class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
+        Manter Orçamento
     </a>
 
     <!-- Botão que abre o modal -->
     <button type="button" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
         @click="abrirModal = true">
-        Excluir Item
+        Excluir Orçamento
     </button>
 
     <!-- Modal -->
     <div x-show="abrirModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
         x-transition>
 
-        <div class="bg-white p-6 rounded shadow-xl w-80" @click.outside="abrirModal = false">
+        <div class="bg-white p-6 rounded ring-1 ring-red-600 shadow-xl w-80" @click.outside="abrirModal = false">
 
-            <h2 class="text-lg font-semibold mb-4 text-gray-800">
+            <h2 class="text-lg font-semibold mb-4 text-red-600">
                 Confirmar Exclusão
             </h2>
 
@@ -376,8 +288,5 @@
     </div>
 
 </div>
-
-
-
 </div>
 {% endblock %}

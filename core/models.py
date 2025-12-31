@@ -133,7 +133,7 @@ class Item(models.Model):
 
 class Descricao(models.Model):
     id_desc = models.AutoField(primary_key=True)
-    descricao = models.CharField(max_length=100, blank=True, null=True)
+    descricao = models.CharField(max_length=100)
 
     class Meta:
         managed = False
