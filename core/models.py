@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from decimal import Decimal
 
 #Classe Usuário
 class UsuarioPerfil(models.Model):
@@ -45,6 +46,11 @@ class Orcamento(models.Model):
         db_table = 'orcamento'
 
     @property
+    def m2(self):
+        return round(self.comprimento * self.largura, 3)
+    
+
+    @property
     def total_m2(self):
         return sum(item.m2 for item in self.itens.all())
 
@@ -69,13 +75,13 @@ class Endereco(models.Model):
 
     tipo = models.CharField(max_length=10)
     nome = models.CharField(max_length=160, blank=True, null=True)
-    endereco = models.CharField(max_length=200, blank=True, null=True)
+    endereco = models.CharField(max_length=200)
     numero = models.CharField(max_length=45)
 
-    municipio = models.CharField(max_length=160, blank=True, null=True)
-    bairro = models.CharField(max_length=160, blank=True, null=True)
-    uf = models.CharField(max_length=2, blank=True, null=True)
-    cep = models.CharField(max_length=9, blank=True, null=True)
+    municipio = models.CharField(max_length=160)
+    bairro = models.CharField(max_length=160)
+    uf = models.CharField(max_length=2)
+    cep = models.CharField(max_length=9)
 
     contato = models.CharField(max_length=160, blank=True, null=True)
     email = models.EmailField(max_length=160, blank=True, null=True)
@@ -125,8 +131,6 @@ class Item(models.Model):
 
     def __str__(self):
         return f'Item {self.descricao or ""} ({self.m2} m²)'
-
-
 
 #Classe Descrição sever de apoio padronização do atribulto descricao da classe Item.
 

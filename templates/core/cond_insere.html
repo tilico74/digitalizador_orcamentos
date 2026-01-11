@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<div class="mb-4 bg-blue-500 text-white rounded-md flex justify-between items-center">
+    <h1 class="text-xl font-semibold m-2">{% block title %}Cadastro de Condomínio{% endblock %}</h1>
+    <div class="flex gap-2 mt-2">
+        <nav class="backdrop-blur-sm rounded-md p-2 inline-flex space-x-2">
+            <a href="{% url 'cond_listar' %}"
+                class="px-4 py-2 text-sm font-medium bg-white/20 hover:bg-white/30 text-white rounded-md transition">
+                <i class="bi bi-arrow-return-left"></i> Retornar
+            </a>
+        </nav>
+    </div>
+</div>
+
+<!-- adicionamos x-data aqui -->
+<form method="post" x-data="{ abrirPesquisa: false, bgDinamico: 'blue' }">
+    {% csrf_token %}
+
+    <div class="grid gap-2">
+        <div class="relative py-2">
+            <label for="{{ form.nome.id_for_label }}"
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                {{ form.nome.label }}
+            </label>
+            {{ form.nome }}
+        </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-8 md:col-span-10 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                {{ form.endereco.label }}
+            </label>
+            <div class="flex gap-2"> {{ form.endereco }}
+                <button type="button"
+                    class="inline-flex items-center px-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                    @click="abrirPesquisa = true; bgDinamico = 'blue'">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="relative col-span-2 md:col-span-1 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                {{ form.numero.label }}</label>
+            {{ form.numero }}
+        </div>
+        <div class="relative col-span-2 md:col-span-1 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                {{ form.uf.label }}</label>
+            {{ form.uf }}
+        </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-6 md:col-span-5 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                {{ form.municipio.label }}
+            </label>
+            {{ form.municipio }}
+        </div>
+        <div class="relative col-span-6 md:col-span-6 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                {{ form.bairro.label }}
+            </label>
+            {{ form.bairro }}
+        </div>
+        <div class="relative col-span-3 md:col-span-1 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                {{ form.cep.label }}
+            </label>
+            {{ form.cep }}
+        </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-6 md:col-span-4 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                {{ form.contato.label }}
+            </label>
+            {{ form.contato }}
+        </div>
+        <div class="relative col-span-6 md:col-span-4 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                {{ form.email.label }}
+            </label>
+            {{ form.email }}
+        </div>
+        <div class="relative col-span-4 md:col-span-2 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                {{ form.fone1.label }}
+            </label>
+            {{ form.fone1 }}
+        </div>
+        <div class="relative col-span-4 md:col-span-2 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                {{ form.fone2.label }}
+            </label>
+            {{ form.fone2 }}
+        </div>
+    </div>
+
+    <div class="py-2">
+        <button type="submit"
+            class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+            Cadastrar
+        </button>
+        <a href="{% url 'cond_listar' %}"
+            class="inline-flex items-center px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700">
+            Cancelar
+        </a>
+    </div>
+
+    {{ form.tipo }}
+    
+    
+    {% include "core/modal_pesquisa_endereco.html" %}
+
+</form>
+
+{% endblock %}

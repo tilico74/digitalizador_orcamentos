@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div class="mb-4 bg-red-600 text-white p-4 rounded-md flex justify-between items-center">
-    <h1 class="text-xl font-semibold">{% block title %}Excluir Orçamento{% endblock %}</h1>
+<div class="mb-4 bg-red-500 text-white rounded-md flex justify-between items-center">
+    <h1 class="text-xl font-semibold m-2">{% block title %}Excluir Orçamento{% endblock %}</h1>
     <div class="flex gap-2 mt-2">
         <nav class="backdrop-blur-sm rounded-md p-2 inline-flex space-x-2">
             <a href="{% url 'orc_listar' %}"
@@ -23,7 +23,7 @@
             Nome
         </label>
         <input type="text" value="{{ orcamento.nome }}" disabled
-            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
 
     </div>
 
@@ -35,13 +35,13 @@
             Condomínio
         </label>
         <input type="text" value="{{ orcamento.endereco.nome }}" disabled
-            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
     </div>
     {% endif %}
 
     <!-- Endereço + Número -->
     <div class="grid grid-cols-12 gap-2">
-        <div class="relative col-span-10 md:col-span-11 py-2">
+        <div class="relative col-span-8 md:col-span-10 py-2">
             <label
                 class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Endereço</label>
             <input type="text" value="{{ orcamento.endereco.endereco }}" disabled
@@ -51,6 +51,12 @@
             <label
                 class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Nº</label>
             <input type="text" value="{{ orcamento.endereco.numero}}" maxlength="6" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+        <div class="relative col-span-2 md:col-span-1 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">UF</label>
+            <input type="text" value="{{ orcamento.endereco.uf}}" maxlength="2" disabled
                 class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
         </div>
     </div>
@@ -63,26 +69,10 @@
             <input type="text" value="{{ orcamento.endereco.municipio }}" disabled
                 class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
         </div>
-        <div class="relative col-span-5 md:col-span-6 py-2">
+        <div class="relative col-span-4 md:col-span-6 py-2">
             <label
                 class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Bairro</label>
             <input type="text" value="{{ orcamento.endereco.bairro}}" disabled
-                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
-        </div>
-        <div class="relative col-span-2 md:col-span-1 py-2">
-            <label
-                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">UF</label>
-            <input type="text" value="{{ orcamento.endereco.uf}}" maxlength="2" disabled
-                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
-        </div>
-    </div>
-
-    <!-- Complemento + CEP -->
-    <div class="grid grid-cols-12 gap-2">
-        <div class="relative col-span-9 md:col-span-11 py-2">
-            <label
-                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Complemento</label>
-            <input type="text" value="{{ orcamento.complemento }}" disabled
                 class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
         </div>
         <div class="relative col-span-3 md:col-span-1 py-2">
@@ -93,26 +83,52 @@
         </div>
     </div>
 
-    <!-- Fones + Email -->
+    <!-- Complemento + CEP -->
     <div class="grid grid-cols-12 gap-2">
-        <div class="relative col-span-6 md:col-span-3 py-2">
+        <div class="relative col-span-7 md:col-span-8 py-2">
             <label
-                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Fone</label>
-            <input type="text" value="{{ orcamento.fone1}}" disabled
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Complemento</label>
+            <input type="text" value="{{ orcamento.complemento }}" disabled
                 class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
         </div>
-        <div class="relative col-span-6 md:col-span-3 py-2">
-            <label
-                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Fone</label>
-            <input type="text" value="{{ orcamento.fone2}}" disabled
-                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
-        </div>
-        <div class="relative col-span-12 md:col-span-6 py-2">
+        <div class="relative col-span-5 md:col-span-4 py-2">
             <label
                 class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Email</label>
             <input type="email" value="{{ orcamento.email}}" disabled
                 class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
         </div>
+    </div>
+
+    <!-- Fones + Email -->
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-4 md:col-span-4 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Fone</label>
+            <input type="text" value="{{ orcamento.fone1}}" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+        <div class="relative col-span-4 md:col-span-4 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Fone</label>
+            <input type="text" value="{{ orcamento.fone2}}" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+        <div class="relative col-span-4 md:col-span-4 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Data</label>
+            <input type="email" value="{{ orcamento.data|date:"d/m/Y" }}" disabled
+                class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+        </div>
+    </div>
+
+    <div class="relative py-2">
+        <label
+            class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+           Observação
+        </label>
+        <input type="text" value="{{ orcamento.obs }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+
     </div>
 
 </div>

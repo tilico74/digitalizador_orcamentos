@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div class="mb-4 bg-red-600 text-white p-4 rounded-md flex justify-between items-center">
-    <h1 class="text-xl font-semibold">{% block title %}Excluir Descrição{% endblock %}</h1>
+<div class="mb-4 bg-red-500 text-white rounded-md flex justify-between items-center">
+    <h1 class="text-xl font-semibold m-2">{% block title %}Excluir Descrição{% endblock %}</h1>
     <div class="flex gap-2 mt-2">
         <nav class="backdrop-blur-sm rounded-md p-2 inline-flex space-x-2">
             <a href="{% url 'desc_listar' %}"
@@ -35,14 +35,14 @@
 <div class="py-2" x-data="{ abrirModal: false }">
 
     <a href="{% url 'desc_listar' %}"
-        class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
-        Manter Descrição
+        class="inline-flex items-center px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700">
+        Cancelar
     </a>
 
     <!-- Botão que abre o modal -->
-    <button type="button" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+    <button type="button" class="inline-flex items-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
         @click="abrirModal = true">
-        Excluir Descrição
+        Excluir
     </button>
 
     <!-- Modal -->

@@ -1,0 +1,102 @@
+{% load static %}
+
+<div x-show="abrirPesquisa" @fechar-modal.window="abrirPesquisa = false" class="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50"
+    x-transition>
+    <div class="bg-white rounded shadow-xl w-full max-w-7xl mt-10 h-[90vh] overflow-y-auto flex flex-col"
+        @click.outside="abrirPesquisa = false">
+
+        <header 
+            :class="{ 'bg-blue-500': bgDinamico === 'blue', 'bg-red-500': bgDinamico === 'red', 'bg-orange-500': bgDinamico === 'orange' }"
+            class="px-6 py-2 border-b border-gray-200 flex justify-between items-center" >
+            <h3 class="text-lg font-semibold text-white"><i class="bi bi-search"></i> Pesquisa Endereço</h3>
+            <button class="text-white hover:text-black transition-colors text-3xl p-2 leading-none" @click="abrirPesquisa = false">
+                &times;
+            </button>
+        </header>
+
+        <div class="m-6 flex-1">
+            <div class="grid gap-2">
+                <div class="grid grid-cols-12 gap-2">
+                    <div class="relative col-span-2 md:col-span-2 py-2">
+                        <label
+                            class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">UF</label>
+                        <select
+                            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition"
+                            id="modal_inp_uf">
+                            <option value="SC">Santa Catarina</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                    <div class="relative col-span-5 md:col-span-3 py-2">
+                        <label
+                            class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Município</label>
+                        <select
+                            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition"
+                            id="modal_inp_municipio">
+                        </select>
+                    </div>
+                    <div class="relative col-span-5 md:col-span-7 py-2">
+                        <label
+                            class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">Endereco</label>
+                        <input type="text" id="modal_inp_endereco" name="modal_inp_endereco" placeholder="Endereço"
+                            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-2 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition" />
+                    </div>
+                </div>
+            </div>
+        
+
+        <div id="header_resultado" class="grid gap-1 mt-3 p-2 bg-blue-100 rounded-md border border-blue-300 md:bg-transparent md:border-gray-300">
+            <div class="grid grid-cols-12 gap-2 font-semibold text-gray-900 py-2 hidden sm:grid">
+                <div class="col-span-3">Endereço</div>
+                <div class="col-span-2">Complemento</div>
+                <div class="col-span-2">Bairro</div>
+                <div class="col-span-2">Município</div>
+                <div class="col-span-1">UF</div>
+                <div class="col-span-1">CEP</div>
+                <div class="col-span-1 text-center">Ação</div>
+            </div>
+
+            <div id="linhas_endereco">
+
+                <!--
+                Linhas de resultados serão inseridas aqui via JavaScript
+                -->
+            </div>
+        </div>
+        </div>
+
+        <footer :class="{ 'bg-blue-500': bgDinamico === 'blue', 'bg-red-500': bgDinamico === 'red', 'bg-orange-500': bgDinamico === 'orange' }"
+        class="px-6 py-2 border-t border-gray-200 flex justify-end gap-3">
+            <button type="button" class="px-4 py-2 rounded bg-white/20 hover:bg-white/30 text-white"
+                @click="abrirPesquisa = false">Fechar</button>
+        </footer>        
+    </div>
+</div>
+
+<!--carrega o js da modal de pesquisa de endereço-->
+<script src="{% static 'js/pesquisa_endereco.js' %}"></script>

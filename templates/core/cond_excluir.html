@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="mb-4 bg-red-500 text-white rounded-md flex justify-between items-center">
+    <h1 class="text-xl font-semibold m-2">{% block title %}Excluir Condomínio{% endblock %}</h1>
+    <div class="flex gap-2 mt-2">
+        <nav class="backdrop-blur-sm rounded-md p-2 inline-flex space-x-2">
+            <a href="{% url 'orc_listar' %}"
+                class="px-4 py-2 text-sm font-medium bg-white/20 hover:bg-white/30 text-white rounded-md transition">
+                <i class="bi bi-arrow-return-left"></i> Retornar
+            </a>
+        </nav>
+    </div>
+</div>
+
+<div class="grid gap-2">
+
+    <div class="grid gap-2">
+        <div class="relative py-2">
+            <label for="{{ form.nome.id_for_label }}"
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                Nome
+            </label>
+            <input type="text" value="{{ condominio.nome }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+        </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-8 md:col-span-10 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                Endereço
+            </label>
+            <input type="text" value="{{ condominio.endereco }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+        </div>
+        <div class="relative col-span-2 md:col-span-1 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                Número</label>
+            <input type="text" value="{{ condominio.numero }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+        </div>
+        <div class="relative col-span-2 md:col-span-1 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                UF</label>
+            <input type="text" value="{{ condominio.uf }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+        </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-6 md:col-span-5 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                Município
+            </label>
+            <input type="text" value="{{ condominio.municipio }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+        </div>
+        <div class="relative col-span-6 md:col-span-6 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                Bairro
+            </label>
+            <input type="text" value="{{ condominio.bairro }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+        </div>
+        <div class="relative col-span-3 md:col-span-1 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                CEP
+            </label>
+            <input type="text" value="{{ condominio.cep}}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+        </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-6 md:col-span-4 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                Contato
+            </label>
+            <input type="text" value="{{ condominio.contato|default_if_none:'' }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+        </div>
+        <div class="relative col-span-6 md:col-span-4 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                E-mail
+            </label>
+            <input type="text" value="{{ condominio.email|default_if_none:'' }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+        </div>
+        <div class="relative col-span-4 md:col-span-2 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                Fone
+            </label>
+           <input type="text" value="{{ condominio.fone1|default_if_none:'' }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+        </div>
+        <div class="relative col-span-4 md:col-span-2 py-2">
+            <label
+                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                Fone
+            </label>
+            <input type="text" value="{{ condominio.fone2|default_if_none:'' }}" disabled
+            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" />
+        </div>
+    </div>
+</div>    
+
+<div class="py-2" x-data="{ abrirModal: false }">
+
+    <a href="{% url 'cond_listar' %}"
+        class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
+        Cancelar
+    </a>
+
+    <!-- Botão que abre o modal -->
+    <button type="button" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+        @click="abrirModal = true">
+        Excluir
+    </button>
+
+    <!-- Modal -->
+    <div x-show="abrirModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        x-transition>
+
+        <div class="bg-white p-6 rounded ring-1 ring-red-600 shadow-xl w-80" @click.outside="abrirModal = false">
+
+            <h2 class="text-lg font-semibold mb-4 text-red-600">
+                Confirmar Exclusão
+            </h2>
+
+            <p class="text-sm text-gray-600 mb-6">
+                Tem certeza que deseja excluir este item? Esta ação não pode ser desfeita.
+            </p>
+
+            <div class="flex justify-end gap-3">
+                <button type="button" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                    @click="abrirModal = false">
+                    Cancelar
+                </button>
+
+                <form method="post" action="{% url 'cond_excluir' condominio.id_end %}">
+                    {% csrf_token %}
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                        Excluir
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+{% endblock %}

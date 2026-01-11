@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="mb-4 bg-blue-500 text-white rounded-md flex justify-between items-center">
+    <h1 class="text-xl font-semibold m-2">{% block title %}Opções de Cadastro de Orçamento{% endblock %}</h1>
+    <div class="flex gap-2 mt-2">
+        <nav class="backdrop-blur-sm rounded-md p-2 inline-flex space-x-2">
+            <a href="{% url 'orc_listar' %}"
+                class="px-4 py-2 text-sm font-medium bg-white/20 hover:bg-white/30 text-white rounded-md transition">
+                <i class="bi bi-arrow-return-left"></i> Retornar
+            </a>
+        </nav>
+    </div>
+</div>
+
+<div class="grid gap-2">
+
+    <h2 class="text-xl font-semibold">Escolha uma opção de cadastramento</h2>
+    <div class="relative py-2">
+        <ul>
+            <li><span class="text-xl font-semibold">Condominial: </span>quando cliente mora em condomínio.</li>
+            <li><span class="text-xl font-semibold">Residencial / Comercial: </span>quando cliente mora em casa ou que contenha apenas uma unidade de
+                no endereço.</li>
+        </ul>
+    </div>
+
+    <div class="grid grid-cols-12 gap-2">
+        <div class="relative col-span-12 md:col-span-6 py-2">
+            <a href="{% url 'orc_insere' 'cond' %}"
+                @click.prevent="tipo = 'cond'"
+                class="w-full flex items-center justify-center h-16 text-center text-lg font-medium bg-blue-500 hover:bg-blue-600 text-white rounded-md transition">
+                <i class="bi bi-building mr-2"></i> Condominial </a>
+        </div>
+        <div class="relative col-span-12 md:col-span-6 py-2">
+            <a href="{% url 'orc_insere' 'res' %}"
+                 @click.prevent="tipo = 'res'"
+                class="w-full flex items-center justify-center h-16 text-center text-lg font-medium bg-blue-500 hover:bg-blue-600 text-white rounded-md transition">
+                <i class="bi bi-house-fill mr-2"></i> Residencial / Comercial </a>    
+        </div>
+    </div>
+</div>
+{% endblock %}
