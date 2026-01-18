@@ -15,7 +15,7 @@
 </div>
 
 
-<form method="post">
+<form method="post" x-data="{ abrirPesquisa: false, abrirPesquisaCondominio: false, bgDinamico: 'blue' }">
     {% csrf_token %}
 
     <div class="grid gap-2">
@@ -29,33 +29,121 @@
             {{ form_orc.nome }}
         </div>
 
-        {% if tipo != "res" %}
-        <!-- Condomínio -->
+
+        {% if tipo == "cond" %}
+        <!-- Seleção de condomínio já cadastrado -->
         <div class="relative py-2">
-            <label
-                class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+            <label class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                Condomínio
+            </label>
+            <div class="flex gap-2">
+                <input type="text" id="nome_condominio_selecionado" class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700" placeholder="Selecione um condomínio..." readonly />
+                <input type="hidden" name="endereco_id" id="endereco_id" />
+                <button type="button"
+                    class="inline-flex items-center px-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                    @click="abrirPesquisaCondominio = true; bgDinamico = 'blue'">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+        {% else %}
+        <!-- Formulário de endereço completo -->
+        <div class="relative py-2">
+            <label class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
                 {{ form_end.nome.label }}
             </label>
-            {{ form_end.nome  }}
+            <div class="flex gap-2">{{ form_end.nome }}</div>
+        </div>
+
+        <!-- Endereço + Número -->
+        <div class="grid grid-cols-12 gap-2">
+            <div class="relative col-span-8 md:col-span-10 py-2">
+                <label class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.endereco.label }}
+                </label>
+                <div class="flex gap-2">{{ form_end.endereco }}
+                    <button type="button"
+                        class="inline-flex items-center px-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                        @click="abrirPesquisa = true; bgDinamico = 'blue'">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="relative col-span-2 md:col-span-1 py-2">
+                <label class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.numero.label }}
+                </label>
+                {{ form_end.numero }}
+            </div>
+            <div class="relative col-span-2 md:col-span-1 py-2">
+                <label class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.uf.label }}
+                </label>
+                {{ form_end.uf }}
+            </div>
+        </div>
+
+        <!-- Município + Bairro + CEP -->
+        <div class="grid grid-cols-12 gap-2">
+            <div class="relative col-span-5 md:col-span-5 py-2">
+                <label class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.municipio.label }}
+                </label>
+                {{ form_end.municipio }}
+            </div>
+            <div class="relative col-span-4 md:col-span-6 py-2">
+                <label class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.bairro.label }}
+                </label>
+                {{ form_end.bairro }}
+            </div>
+            <div class="relative col-span-3 md:col-span-1 py-2">
+                <label class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.cep.label }}
+                </label>
+                {{ form_end.cep }}
+            </div>
         </div>
         {% endif %}
+<script>
+// Preencher campo ao selecionar condomínio na modal
+function preencherFormularioCond(item) {
+    document.getElementById("nome_condominio_selecionado").value = item.nome;
+    document.getElementById("endereco_id").value = item.id_end;
+    window.dispatchEvent(new CustomEvent('fechar-modal'));
+}
+</script>
 
         <!-- Endereço + Número -->
         <div class="grid grid-cols-12 gap-2">
             <div class="relative col-span-8 md:col-span-10 py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">{{ form_end.endereco.label}}</label>
-                {{ form_end.endereco }}
+                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.endereco.label }}
+                </label>
+                <div class="flex gap-2"> {{ form_end.endereco }}
+                    {% if tipo != "cond" %}
+                    <button type="button"
+                        class="inline-flex items-center px-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                        @click="abrirPesquisa = true; bgDinamico = 'blue'">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    {% endif %}
+                </div>
             </div>
             <div class="relative col-span-2 md:col-span-1 py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">{{ form_end.numero.label }}</label>
+                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.numero.label }}
+                </label>
                 {{ form_end.numero }}
             </div>
             <div class="relative col-span-2 md:col-span-1 py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">{{ form_end.uf.label }}</label>
-                    {{ form_end.uf  }}
+                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.uf.label }}
+                </label>
+                {{ form_end.uf }}
             </div>
         </div>
 
@@ -63,18 +151,24 @@
         <div class="grid grid-cols-12 gap-2">
             <div class="relative col-span-5 md:col-span-5 py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">{{ form_end.municipio.label }}</label>
-                    {{ form_end.municipio  }}                
+                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.municipio.label }}
+                </label>
+                {{ form_end.municipio }}
             </div>
             <div class="relative col-span-4 md:col-span-6 py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">{{ form_end.bairro.label }}</label>
-                    {{ form_end.bairro  }}
+                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.bairro.label }}
+                </label>
+                {{ form_end.bairro }}
             </div>
             <div class="relative col-span-3 md:col-span-1 py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">{{ form_end.cep.label }}</label>
-                    {{ form_end.cep  }} 
+                    class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                    {{ form_end.cep.label }}
+                </label>
+                {{ form_end.cep }}
             </div>
         </div>
 
@@ -90,7 +184,7 @@
             <div class="relative col-span-5 md:col-span-4 py-2">
                 <label
                     class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
-                {{ form_orc.email.label }}
+                    {{ form_orc.email.label }}
                 </label>
                 {{ form_orc.email }}
             </div>
@@ -108,7 +202,7 @@
             <div class="relative col-span-4 md:col-span-4 py-2">
                 <label
                     class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
-                    {{ form_orc.fone2.label  }}
+                    {{ form_orc.fone2.label }}
                 </label>
                 {{ form_orc.fone2 }}
             </div>
@@ -124,7 +218,7 @@
         <div class="relative py-2">
             <label
                 class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
-                {{ form_orc.obs.label  }}
+                {{ form_orc.obs.label }}
             </label>
             {{ form_orc.obs }}
         </div>
@@ -147,19 +241,22 @@
 
         <!-- Linhas -->
 
-        <div class="grid grid-cols-12 gap-2 rounded-md ring-2 ring-blue-300 bg-blue-50 p-2 sm:ring-0 md:p-0 mb-2 md:mb-0 md:bg-transparent">
+        <div
+            class="grid grid-cols-12 gap-2 rounded-md ring-2 ring-blue-300 bg-blue-50 p-2 sm:ring-0 md:p-0 mb-2 md:mb-0 md:bg-transparent">
 
             {{ formset.management_form }}
             {% for form in formset %}
 
             <div class="col-span-4 sm:col-span-1 relative py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{ form.comprimento.label }}</label>
-                    {{ form.comprimento }}
+                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{
+                    form.comprimento.label }}</label>
+                {{ form.comprimento }}
             </div>
             <div class="col-span-4 sm:col-span-1 relative py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{ form.largura.label }}</label>
+                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{
+                    form.largura.label }}</label>
                 {{ form.largura }}
             </div>
             <div class="col-span-4 sm:col-span-1 relative py-2">
@@ -170,32 +267,36 @@
             </div>
             <div class="col-span-12 sm:col-span-4 relative py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{ form.descricao.label }}</label>
-                    {{ form.descricao }}
+                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{
+                    form.descricao.label }}</label>
+                {{ form.descricao }}
             </div>
             <div class="col-span-6 sm:col-span-1 relative py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{ form.gancho.label }}</label>
-                    {{ form.gancho }}
+                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{
+                    form.gancho.label }}</label>
+                {{ form.gancho }}
             </div>
             <div class="col-span-6 sm:col-span-1 relative py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{ form.cor.label }}</label>
-                    {{ form.cor }}
+                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{
+                    form.cor.label }}</label>
+                {{ form.cor }}
             </div>
             <div class=" col-span-6 sm:col-span-1 relative py-2">
                 <label
-                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{ form.preco.label }}</label>
-                    {{ form.preco }}
+                    class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">{{
+                    form.preco.label }}</label>
+                {{ form.preco }}
             </div>
             <div class="col-span-6 sm:col-span-1 relative py-2">
                 <label
                     class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Valor</label>
                 <input type="text" value="" disabled
                     class="w-full rounded bg-blue-150 ring-1 ring-blue-300 px-2 py-1 text-gray-700 text-right focus:ring-2 focus:ring-blue-500/40" />
-            </div>            
+            </div>
 
-            
+
             <div class="col-span-12 sm:col-span-1 relative py-2">
                 <label
                     class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Ação</label>
@@ -212,7 +313,7 @@
                         </button>
                     </span>
                 </div>
-            </div>            
+            </div>
             {% endfor %}
         </div>
 
@@ -227,7 +328,7 @@
                         class="absolute left-3 top-[-1px] text-[12px] text-blue-700 font-semibold bg-white px-1 leading-none pointer-events-none sm:hidden">Total
                         M²</label>
                     <input type="text" value="" disabled
-                        class="w-full rounded bg-white ring-1 ring-blue-300 px-2 py-1 text-gray-700 text-center focus:ring-2 focus:ring-blue-500/40" />
+                        class="w-full rounded bg-blue-100 ring-1 ring-blue-300 px-2 py-1 text-gray-700 text-center focus:ring-2 focus:ring-blue-500/40" />
                 </div>
                 <div class="col-span-6 sm:col-span-6 py-2 hidden sm:block"></div>
                 <div class="col-span-6 sm:col-span-1 py-2 text-center font-semibold text-blue-600 hidden sm:block">
@@ -237,7 +338,7 @@
                     <label
                         class="absolute left-3 top-[-1px] text-[12px] text-blue-700 font-semibold bg-white px-1 leading-none pointer-events-none sm:hidden">Sub-Total</label>
                     <input type="text" value="" disabled
-                        class="w-full rounded bg-white ring-1 ring-blue-300 px-2 py-1 text-blue-700 text-right focus:ring-2 focus:ring-blue-500/40" />
+                        class="w-full rounded bg-blue-100 ring-1 ring-blue-300 px-2 py-1 text-blue-700 text-right focus:ring-2 focus:ring-blue-500/40" />
                 </div>
 
 
@@ -249,7 +350,8 @@
                 </div>
                 <div class="col-span-6 sm:col-span-1 relative py-2">
                     <label
-                        class="absolute left-3 top-[-1px] text-[12px] text-blue-700 font-semibold bg-white px-1 leading-none pointer-events-none sm:hidden">{{ form_orc.desconto.label }}</label>
+                        class="absolute left-3 top-[-1px] text-[12px] text-blue-700 font-semibold bg-white px-1 leading-none pointer-events-none sm:hidden">{{
+                        form_orc.desconto.label }}</label>
                     {{ form_orc.desconto }}
                 </div>
 
@@ -262,7 +364,7 @@
                     <label
                         class="absolute left-3 top-[-1px] text-[12px] text-blue-700 font-semibold bg-white px-1 leading-none pointer-events-none sm:hidden">Total</label>
                     <input type="text" value="" disabled
-                        class="w-full rounded bg-white ring-1 ring-blue-300 font-bold px-2 py-1 text-blue-700 text-right focus:ring-2 focus:ring-blue-500/40" />
+                        class="w-full rounded bg-blue-100 ring-1 ring-blue-300 font-bold px-2 py-1 text-blue-700 text-right focus:ring-2 focus:ring-blue-500/40" />
                 </div>
 
             </div>
@@ -282,7 +384,10 @@
     </div>
 
 
-    <input type="hidden" name="tipo" value="{{ tipo }}">
+    
+    {{ form_orc.tipo }}
+    {% include "core/modal_pesquisa_endereco.html" %}
+    {% include "core/modal_pesquisa_condominio.html" %}
 
 </form>
 

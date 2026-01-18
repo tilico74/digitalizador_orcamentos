@@ -78,27 +78,27 @@
     {% for condominio in condominios %}
     <div class="grid grid-cols-12 gap-2 rounded-md ring-2 ring-blue-600 bg-blue-50 p-2 sm:ring-0 md:p-0 mb-2 md:mb-0 md:bg-transparent">
 
-        <div class="col-span-2 sm:col-span-4 relative py-2">
-            <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Id</label>
+        <div class="col-span-12 sm:col-span-4 relative py-2">
+            <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Nome</label>
             <div class="w-full rounded bg-white ring-1 ring-blue-300 px-2 py-1 text-gray-700 md:w-auto md:rounded-none md:ring-0 md:px-0 md:py-0 md:text-inherit truncate">
                 {{ condominio.nome }}
             </div>
         </div>
 
-        <div class="col-span-10 sm:col-span-3 relative py-2">
-            <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Descrição</label>
+        <div class="col-span-12 sm:col-span-3 relative py-2">
+            <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Endereço</label>
             <div class="w-full rounded bg-white ring-1 ring-blue-300 px-2 py-1 text-gray-700 md:w-auto md:rounded-none md:ring-0 md:px-0 md:py-0 md:text-inherit">
                 {{ condominio.endereco }}, {{ condominio.numero }}
             </div>
         </div>
-        <div class="col-span-10 sm:col-span-2 relative py-2">
-            <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Descrição</label>
+        <div class="col-span-6 sm:col-span-2 relative py-2">
+            <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Município</label>
             <div class="w-full rounded bg-white ring-1 ring-blue-300 px-2 py-1 text-gray-700 md:w-auto md:rounded-none md:ring-0 md:px-0 md:py-0 md:text-inherit">
                 {{ condominio.municipio }}
             </div>
         </div>
-        <div class="col-span-10 sm:col-span-2 relative py-2">
-            <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Descrição</label>
+        <div class="col-span-6 sm:col-span-2 relative py-2">
+            <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Bairro</label>
             <div class="w-full rounded bg-white ring-1 ring-blue-300 px-2 py-1 text-gray-700 md:w-auto md:rounded-none md:ring-0 md:px-0 md:py-0 md:text-inherit">
                 {{ condominio.bairro }}
             </div>

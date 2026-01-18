@@ -92,7 +92,7 @@
                         <div class="col-span-6 sm:col-span-1 relative py-2 text-center">
                             <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Ação</label>
                             <a href="#" class="inline-flex items-center rounded-md px-2.5 py-1.5 text-sm font-medium bg-blue-500 text-white hover:bg-blue-600"
-                                 onclick='preencherFormulario(${JSON.stringify(item)})'>
+                                 onclick='preencherFormularioRes(${JSON.stringify(item)})'>
                                 <i class="bi bi-check2"></i>
                             </a>
                         </div>
@@ -126,7 +126,8 @@
     });
 
     // Função que insere os valores nos inputs do formulário
-    function preencherFormulario(item) {
+    function preencherFormularioRes(item) {
+        
         document.getElementById("id_endereco").value = item.logradouro;
         document.getElementById("id_municipio").value = item.localidade;
         document.getElementById("id_uf").value = item.uf;

@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
+from django.http import JsonResponse
 from .models import *
 from .forms import *
 
@@ -32,23 +33,44 @@ def orc_insere(request, tipo=None):
 
     if request.method == "POST":
         form_orc = OrcamentoForm(request.POST)
-        form_end = EnderecoForm(request.POST, tipo_fixo=tipo)
         formset = ItemFormSet(request.POST, queryset=Item.objects.none())
 
-        if form_orc.is_valid() and form_end.is_valid() and formset.is_valid():
-            endereco = form_end.save()
-            orcamento = form_orc.save(commit=False)
-            orcamento.endereco = endereco
-            orcamento.save()
-
-            formset.instance = orcamento  # vincula itens ao orçamento
-            formset.save()
-
-            return redirect("orc_listar")
+        if tipo == "cond":
+            # Recebe o id do endereço selecionado
+            endereco_id = request.POST.get("endereco_id")
+            endereco = None
+            if endereco_id:
+                try:
+                    endereco = Endereco.objects.get(pk=endereco_id)
+                except Endereco.DoesNotExist:
+                    endereco = None
+            if form_orc.is_valid() and endereco and formset.is_valid():
+                orcamento = form_orc.save(commit=False)
+                orcamento.endereco = endereco
+                orcamento.save()
+                formset.instance = orcamento
+                formset.save()
+                return redirect("orc_listar")
+            # Se não for válido, reexibe o form com erro
+            form_end = None
+        else:
+            form_end = EnderecoForm(request.POST, tipo_fixo=tipo)
+            if form_orc.is_valid() and form_end.is_valid() and formset.is_valid():
+                endereco = form_end.save()
+                orcamento = form_orc.save(commit=False)
+                orcamento.endereco = endereco
+                orcamento.save()
+                formset.instance = orcamento
+                formset.save()
+                return redirect("orc_listar")
+        # Se não for válido, reexibe o form
     else:
         form_orc = OrcamentoForm()
-        form_end = EnderecoForm(tipo_fixo=tipo)
         formset = ItemFormSet(queryset=Item.objects.none())
+        if tipo == "cond":
+            form_end = None
+        else:
+            form_end = EnderecoForm(tipo_fixo=tipo)
 
     return render(
         request,
@@ -201,7 +223,9 @@ def cond_insere(request):
             return redirect("cond_listar")
     else:
         form = EnderecoForm(tipo_fixo="cond")
-    return render(request, "core/cond_insere.html", {"form": form})
+
+    context = {"form": form}
+    return render(request, "core/cond_insere.html", context)
 
 
 def cond_excluir(request, id_cond):
@@ -269,3 +293,39 @@ def cond_pesquisar(request):
         "condominios": condominios,
     })
 
+def modal_pesquisa_condominio(request):
+    
+    form = PesquisaCondominioForm(request.GET or None)
+    
+    return render(request, "core/modal_pesquisa_condominio.html", {
+        "form": form,
+    })
+
+# Modal para pesquisar condomínios (retorna um Json)
+def cond_pesquisar_json(request):
+    condominios = []
+    form = PesquisaCondominioForm(request.GET or None)
+
+    if form.is_valid():
+        nome = form.cleaned_data.get('nome')
+        endereco = form.cleaned_data.get('endereco')
+        bairro = form.cleaned_data.get('bairro')
+        municipio = form.cleaned_data.get('municipio')
+
+        qs = Endereco.objects.filter(tipo='cond')
+
+        if nome:
+            qs = qs.filter(nome__icontains=nome)
+        if endereco:
+            qs = qs.filter(endereco__icontains=endereco)
+        if bairro:
+            qs = qs.filter(bairro__icontains=bairro)
+        if municipio:
+            qs = qs.filter(municipio__icontains=municipio)
+
+        # transforma em lista de dicionários
+        condominios = list(qs.values(
+            "id_end", "nome", "endereco","numero","municipio","bairro","uf", "cep"
+        ))
+
+    return JsonResponse({"condominios": condominios}, safe=False)

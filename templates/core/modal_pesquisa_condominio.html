@@ -1,0 +1,236 @@
+{% load static %}
+
+<div x-show="abrirPesquisaCondominio" @fechar-modal.window="abrirPesquisaCondominio = false"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50" x-transition>
+    <div class="bg-white rounded shadow-xl w-full max-w-7xl mt-10 h-[90vh] overflow-y-auto flex flex-col"
+        @click.outside="abrirPesquisaCondominio = false">
+
+        <header
+            :class="{ 'bg-blue-500': bgDinamico === 'blue', 'bg-red-500': bgDinamico === 'red', 'bg-orange-500': bgDinamico === 'orange' }"
+            class="px-6 py-2 border-b border-gray-200 flex justify-between items-center">
+            <h3 class="text-lg font-semibold text-white"><i class="bi bi-search"></i> Pesquisa Condomínio</h3>
+            <button class="text-white hover:text-black transition-colors text-3xl p-2 leading-none"
+                @click="abrirPesquisaCondominio = false">
+                &times;
+            </button>
+        </header>
+
+        <div class="m-6 flex-1">
+            <div>
+                <div class="grid gap-2">
+                    <div class="relative py-2">
+                        <label for="{{ form.termo.id_for_label }}"
+                            class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                            Condomínio
+                        </label>
+                        <input type="text" value="" id="input_pesquisa_nome_condominio"
+                            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" placeholder="Digite parte do nome..." />
+                    </div>
+                </div>
+                <div class="grid gap-2">
+                    <div class="relative py-2">
+                        <label for="{{ form.termo.id_for_label }}"
+                            class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                            Endereço
+                        </label>
+                        <input type="text" value="" id="input_pesquisa_endereco_condominio"
+                            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" placeholder="Digite parte do endereço..." />
+
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-12 gap-2">
+                    <div class="relative col-span-6 md:col-span-6 py-2">
+                        <label
+                            class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                            Município
+                        </label>
+                        <input type="text" value="" id="input_pesquisa_municipio_condominio"
+                            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" placeholder="Digite parte do município..." />
+
+                    </div>
+                    <div class="relative col-span-6 md:col-span-6 py-2">
+                        <label
+                            class="absolute left-3 top-[-1px] text-[12px] text-gray-700 bg-white px-1 leading-none pointer-events-none">
+                            Bairro
+                        </label>
+                        <input type="text" value="" id="input_pesquisa_bairro_condominio"
+                            class="w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200" placeholder="Digite parte do bairro..."/>
+
+                    </div>
+                </div>
+
+                <div class="py-2">
+                    <button type="button" id="btn_pesquisar_condominio"
+                        class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                        Pesquisar
+                    </button>
+                    <button type="button"  id="btn_limpa_inputs"
+                        class="inline-flex items-center px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+                        Limpar </button>
+                </div>
+            </div>
+
+            
+            <div id="cabeçalho" class="grid gap-1 mt-3 p-2 bg-blue-100 rounded-md border border-blue-300 md:bg-transparent md:border-gray-300">
+                <!--Cabeçalho -->
+                <div class="grid grid-cols-12 gap-2 font-semibold text-gray-900 py-2 hidden sm:grid">
+                    <div class="col-span-4">Condomínio</div>
+                    <div class="col-span-3">Endereço</div>
+                    <div class="col-span-2">Município</div>
+                    <div class="col-span-2">Bairro</div>
+                    <div class="col-span-1">Ações</div>
+                </div>
+
+                <div id="lista_cond">
+
+                </div>                
+            </div>
+           
+            <div id="mensagem" class="text-sm text-gray-500 py-4 text-center"></div>
+            
+        </div>
+
+        <footer
+            :class="{ 'bg-blue-500': bgDinamico === 'blue', 'bg-red-500': bgDinamico === 'red', 'bg-orange-500': bgDinamico === 'orange' }"
+            class="px-6 py-2 border-t border-gray-200 flex justify-end gap-3">
+            <button type="button" class="px-4 py-2 rounded bg-white/20 hover:bg-white/30 text-white"
+                @click="abrirPesquisaCondominio = false">Fechar</button>
+        </footer>
+    </div>
+</div>
+
+<script>
+    // Referências únicas
+    const nome = document.getElementById('input_pesquisa_nome_condominio');
+    const endereco = document.getElementById('input_pesquisa_endereco_condominio');
+    const municipio = document.getElementById('input_pesquisa_municipio_condominio');
+    const bairro = document.getElementById('input_pesquisa_bairro_condominio');
+    const listaCond = document.getElementById('lista_cond');
+    const mensagem = document.getElementById('mensagem');
+    const cabecalho = document.getElementById('cabeçalho');
+    cabecalho.style.display = 'none'; // Oculta o cabeçalho inicialmente
+    mensagem.style.display = 'none'; // Oculta a mensagem inicialmente
+
+    document.getElementById('btn_limpa_inputs').addEventListener('click', function() {
+        nome.value = '';
+        endereco.value = '';
+        municipio.value = '';
+        bairro.value = '';
+        listaCond.innerHTML = '';
+        cabecalho.style.display = 'none'; // Oculta o cabeçalho ao limpar
+        mensagem.innerText = '';
+    });
+
+    document.getElementById('btn_pesquisar_condominio').addEventListener('click', async function() {
+        
+
+        const params = {
+        nome: nome.value,
+        endereco: endereco.value,
+        municipio: municipio.value,
+        bairro: bairro.value
+        };
+
+        try {
+            const queryString = new URLSearchParams(params).toString();
+            const response = await fetch(`http://127.0.0.1:8000/api/condominios/?${queryString}`);
+
+            if (!response.ok) {
+                throw new Error("Erro na requisição: " + response.status);
+            }
+
+            const data = await response.json();
+
+            // Agora percorremos a lista dentro de "data.condominios"
+            if (Array.isArray(data.condominios) && data.condominios.length > 0) {
+
+                cabecalho.style.display = 'grid'; // Exibe o cabeçalho quando houver resultados
+
+                listaCond.innerHTML = `
+                    <div class="flex items-center gap-2 text-gray-600">
+                    <svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                    <span>Carregando resultados...</span>
+                    </div>
+                `;
+                await new Promise(resolve => setTimeout(resolve, 500)); // Simula um pequeno atraso para o efeito de carregamento
+               
+                
+                listaCond.innerHTML = data.condominios.map(item => `
+                <div class="grid grid-cols-12 gap-2 rounded-md ring-2 ring-blue-600 bg-blue-50 p-2 sm:ring-0 md:p-0 mb-2 md:mb-0 md:bg-transparent hover:bg-gray-200 cursor-pointer">
+
+                    <div class="col-span-12 sm:col-span-4 relative py-2">
+                        <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">
+                            Nome
+                        </label>
+                        <div class="w-full rounded bg-white ring-1 ring-blue-300 px-2 py-1 text-gray-700 md:w-auto md:rounded-none md:ring-0 md:px-0 md:py-0 md:text-inherit md:bg-transparent truncate">
+                            ${item.nome}
+                        </div>
+                    </div>
+
+                    <div class="col-span-12 sm:col-span-3 relative py-2">
+                        <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">
+                            Endereço
+                        </label>
+                        <div class="w-full rounded bg-white ring-1 ring-blue-300 px-2 py-1 text-gray-700 md:w-auto md:rounded-none md:ring-0 md:px-0 md:py-0 md:text-inherit md:bg-transparent">
+                            ${item.endereco}, ${item.numero}
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-2 relative py-2">
+                        <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">
+                            Município
+                        </label>
+                        <div class="w-full rounded bg-white ring-1 ring-blue-300 px-2 py-1 text-gray-700 md:w-auto md:rounded-none md:ring-0 md:px-0 md:py-0 md:text-inherit md:bg-transparent">
+                            ${item.municipio}
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-2 relative py-2">
+                        <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">
+                            Bairro
+                        </label>
+                        <div class="w-full rounded bg-white ring-1 ring-blue-300 px-2 py-1 text-gray-700 md:w-auto md:rounded-none md:ring-0 md:px-0 md:py-0 md:text-inherit md:bg-transparent">
+                            ${item.bairro}
+                        </div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-1 relative py-2 text-center">
+                        <label class="absolute left-3 top-[-1px] text-[12px] text-blue-700 bg-white px-1 leading-none pointer-events-none sm:hidden">Ação</label>
+                        <a href="#" class="inline-flex items-center rounded-md px-2.5 py-1.5 text-sm font-medium bg-blue-500 text-white hover:bg-blue-600"
+                          onclick='preencherFormularioCond(${JSON.stringify(item)})'>
+                            <i class="bi bi-check2"></i>
+                        </a>
+                    </div>
+                </div>
+                `).join("");
+                
+                mensagem.innerText = "";
+                        
+            }else {
+                listaCond.innerHTML = '';
+                cabecalho.style.display = 'none'; // Oculta o cabeçalho quando não houver resultados
+                mensagem.innerText = "Nenhum condomínio encontrado com os critérios informados.";
+            }           
+
+    } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+    }
+});
+
+function preencherFormularioCond(item) {
+
+    document.getElementById("id_nome_condominio").value = item.nome;
+    document.getElementById("id_endereco").value = item.endereco;
+    document.getElementById("id_municipio").value = item.municipio;
+    document.getElementById("id_numero").value = item.numero;
+    document.getElementById("id_uf").value = item.uf;
+    document.getElementById("id_cep").value = item.cep;
+    document.getElementById("id_bairro").value = item.bairro;
+
+    window.dispatchEvent(new CustomEvent('fechar-modal'));
+}
+</script>

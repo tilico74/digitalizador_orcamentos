@@ -20,4 +20,6 @@ urlpatterns = [
     path('cond_excluir/<int:id_cond>/', views.cond_excluir, name='cond_excluir'),
     path('cond_editar/<int:id_cond>/', views.cond_editar, name='cond_editar'),
     path("cond_pesquisar/", views.cond_pesquisar, name="cond_pesquisar"),
+    path("modal_pesquisa_condominio/", views.modal_pesquisa_condominio, name="modal_pesquisa_condominio"),
+    path("api/condominios/", views.cond_pesquisar_json, name="cond_pesquisar_json"),
 ]

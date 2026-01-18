@@ -70,7 +70,7 @@ class EnderecoForm(forms.ModelForm):
         }
         widgets = { 
             "tipo": forms.HiddenInput(),           
-            "nome": forms.TextInput(attrs={"class": "w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200", "placeholder": "Condomínio...","required": True}),
+            "nome": forms.TextInput(attrs={"class": "w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200", "placeholder": "Condomínio...","required": True, "id": "id_nome_condominio"}),
             "endereco": forms.TextInput(attrs={"class": "w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200", "placeholder": "Endereço..."}),
             "numero": forms.TextInput(attrs={"class": "w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200", "placeholder": "Número..."}),
             "municipio": forms.TextInput(attrs={"class": "w-full rounded bg-white ring-1 ring-gray-300 px-2 pt-1 pb-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition duration-200", "placeholder": "Município..."}),
